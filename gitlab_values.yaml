@@ -16,16 +16,6 @@ gitlab:
         config:
           key: config
           secret: storage-config
-  gitlab-exporter:
-    enabled: true
-    metrics:
-      enabled: true
-      port: 9168
-      path: /metrics
-      serviceMonitor:
-        enabled: true
-        additionalLabels:
-          release: kube-prometheus-stack
   webservice:
     enabled: true
     metrics:
