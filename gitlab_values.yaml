@@ -1,0 +1,87 @@
+USER-SUPPLIED VALUES:
+USER-SUPPLIED VALUES: null
+certmanager:
+  installCRDs: false
+certmanager-issuer:
+  email: enrico.weisskirchen@materna.group
+gitlab:
+  migrations:
+    enabled: true
+  toolbox:
+    backups:
+      cron:
+        enabled: false
+        schedule: 30 13 * * *
+      objectStorage:
+        config:
+          key: config
+          secret: storage-config
+  gitlab-exporter:
+    enabled: true
+    metrics:
+      enabled: true
+      port: 9168
+      path: /metrics
+      serviceMonitor:
+        enabled: true
+        additionalLabels:
+          release: kube-prometheus-stack
+  webservice:
+    enabled: true
+    metrics:
+      enabled: true
+      port: 8083
+      path: /metrics
+      serviceMonitor:
+        enabled: true
+        additionalLabels:
+          release: kube-prometheus-stack
+global:
+  appConfig:
+    backups:
+      bucket: mat-gitlab-backup
+    omniauth:
+      allowBypassTwoFactor: true
+      allowSingleSignOn:
+      - openid_connect
+      autoLinkLdapUser: false
+      autoLinkSamlUser: false
+      autoLinkUser: true
+      autoSignInWithProvider: null
+      blockAutoCreatedUsers: false
+      enabled: true
+      externalProviders: []
+      providers:
+      - secret: gitlab-keycloak
+      syncProfileAttributes:
+      - email
+      syncProfileFromProvider: []
+    terraformState:
+      enabled: true
+  edition: ce
+  email:
+    display_name: GitLab-Test
+    from: no-reply.j2cp@materna.group
+    reply_to: no-reply.j2cp@materna.group
+  hosts:
+    domain: tst.materna.work
+    externalIP: 20.67.111.222
+  smtp:
+    address: smtp.office365.com
+    authentication: login
+    domain: materna.group
+    enabled: true
+    password:
+      key: password
+      secret: gitlab-smtp-password
+    port: 587
+    starttls_auto: true
+    user_name: no-reply.j2cp@materna.group
+minio:
+  persistence:
+    size: 300Gi
+postgresql:
+  image:
+    tag: 13.6.0
+prometheus:
+  install: false
