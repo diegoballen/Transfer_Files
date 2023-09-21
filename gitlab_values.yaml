@@ -20,12 +20,25 @@ gitlab:
     enabled: true
     metrics:
       enabled: true
-      port: 8083
       path: /metrics
+      port: 8083
       serviceMonitor:
-        enabled: true
         additionalLabels:
           release: kube-prometheus-stack
+        enabled: true
+gitlab-runner:
+  # runners:
+    service:
+      enabled: true
+      type: ClusterIP
+    metrics:
+      enabled: true
+      path: /metrics
+      port: 9252          
+      serviceMonitor:
+        labels:
+          release: kube-prometheus-stack
+        enabled: true
 global:
   appConfig:
     backups:
