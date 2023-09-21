@@ -27,18 +27,17 @@ gitlab:
           release: kube-prometheus-stack
         enabled: true
 gitlab-runner:
-  # runners:
-    service:
+  service:
+    enabled: true
+    type: ClusterIP
+  metrics:
+    enabled: true
+    path: /metrics
+    port: 9252          
+    serviceMonitor:
+      labels:
+        release: kube-prometheus-stack
       enabled: true
-      type: ClusterIP
-    metrics:
-      enabled: true
-      path: /metrics
-      port: 9252          
-      serviceMonitor:
-        labels:
-          release: kube-prometheus-stack
-        enabled: true
 global:
   appConfig:
     backups:
